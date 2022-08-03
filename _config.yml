@@ -1,25 +1,10 @@
-# Welcome to Jekyll!
-#
-# This config file is meant for settings that affect your whole blog, values
-# which you are expected to set up once and rarely edit after that. If you find
-# yourself editing this file very often, consider using Jekyll's data files
-# feature for the data you need to update frequently.
-#
-# For technical reasons, this file is *NOT* reloaded automatically when you use
-# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
-
-# Site settings
-# These are used to personalize your new site. If you look in the HTML files,
-# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
-# You can create any custom variable you would like, and they will be accessible
-# in the templates via {{ site.myvariable }}.
 title: keter's blog
 email: moshenwuji@live.com
 description: 记录一些个人在程序开发学习中的一些历程 # this means to ignore newlines until "baseurl:"
 
 baseurl: "" # the subpath of your site, e.g. /blog
 
-twitter_username: 不用tt
+# twitter_username: 不用tt
 github_username:  eterk
 
 domain: eterk.github.io       # if you want to force HTTPS, specify the domain without the http at the start, e.g. example.com
@@ -28,7 +13,8 @@ url: https://eterk.github.io  # the base hostname and protocol for your site, e.
 
 # Build settings
 markdown: kramdown
-theme: jekyll-theme-minimal
+theme: minima
+repository: eterk/eterk.github.io
 plugins:
   - jekyll-feed
 
