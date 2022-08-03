@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "创建gh-pages 站点"
-date: 2022-08-03 17:30:00 +0000
+title:  "创建gh-pages 站点"
+date:   2022-08-01 13:30:00 +0000
 categories: 技术文章
+tags : application
 ---
-
 
 大致是按照操作的
 [gh-操作] (https://docs.github.com/cn/pages/setting-up-a-github-pages-site-with-jekyll/creating-a-github-pages-site-with-jekyll)
@@ -25,7 +25,8 @@ source 'http://rubygems.org'
         ```
         ~ bundle add webrick# (缺失的包)
         ~ bundle install
-        ~ bundle exec jekyll server
+        ~ bundle exec jekyll server # 启动页面服务 Build the site and make it available on a local server
+        ~ jekyll server # 也是启动页面服务
         ```
 3. 在提交文件遇到的一些问题
 
@@ -45,3 +46,12 @@ OpenSSL SSL_read: Connection was reset, errno 10054
 
 4.  Layout 'about' requested in _ does not exist
 暂时不太搞懂layout 和页面是怎么关联的
+
+
+5. post 中的文章老是没法正常展示在页面中，经过搜索检查原因总结如下
+   [stackoverflow 回答](https://stackoverflow.com/questions/30625044/jekyll-post-not-generated)
+> The post is not placed in the _posts directory.
+> The post has incorrect title. Posts should be named YEAR-MONTH-DAY-title.MARKUP (Note the MARKUP - extension, which is usually .md or .markdown)
+> The post's date is in the future. You can make the post visible by setting future: true in _config.yml (documentation)
+> The post has published: false in its front matter. Set it to true.
+> The title contains a : character. Replace it with &#58. Works in jekyll 3.8.3 (and probably in other 'recent' releases).

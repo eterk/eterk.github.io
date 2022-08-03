@@ -3,6 +3,7 @@ layout: post
 title: "1到100亿以内的素数按顺序的IO输出"
 date: 2022-08-02 17:30:00 +0000
 categories: 技术文章
+tags: algorithm
 ---
 
 ### 使用Sieve_of_Eratosthenes 计算素数

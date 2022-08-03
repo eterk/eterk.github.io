@@ -16,3 +16,6 @@ You can find the source code for Jekyll at GitHub:
 
 
 [jekyll-organization]: https://github.com/jekyll
+
+#### 测试pdf 文件获取
+you can [get the PDF](/resource/pdf/Bigtable%20A%20Distributed%20Storage%20System%20for%20Structured%20Data.pdf) directly.
