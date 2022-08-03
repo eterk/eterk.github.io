@@ -28,7 +28,7 @@ url: https://eterk.github.io  # the base hostname and protocol for your site, e.
 
 # Build settings
 markdown: kramdown
-theme: minima
+theme: jekyll-theme-minimal
 plugins:
   - jekyll-feed
 
