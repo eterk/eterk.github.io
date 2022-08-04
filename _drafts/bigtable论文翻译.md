@@ -1,3 +1,7 @@
+
+
+
+**论文原文 [get the PDF](/resource/pdf/Bigtable%20A%20Distributed%20Storage%20System%20for%20Structured%20Data.pdf)**
 ## 摘要
 
 `bigtable` 是一个设计用来scale to 非常大的空间 数千商业服务器的PB级数据的结构化数据管理系统。
