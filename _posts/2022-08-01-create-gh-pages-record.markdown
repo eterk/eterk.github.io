@@ -55,4 +55,20 @@ OpenSSL SSL_read: Connection was reset, errno 10054
 > The post's date is in the future. You can make the post visible by setting future: true in _config.yml (documentation)
 > The post has published: false in its front matter. Set it to true.
 > The title contains a : character. Replace it with &#58. Works in jekyll 3.8.3 (and probably in other 'recent' releases).
-> 
+
+
+<div id="container"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  id: '<%= page.title %>', // 可选。默认为 location.href
+  owner: 'eterk',
+  repo: 'eterk.github.io',
+  oauth: {
+    client_id: 'f35aa6f240b2b42f8293',
+    client_secret: 'af3c17445a1a1caa52703a3633338d507e513595',
+  },
+})
+gitment.render('container')
+</script>
