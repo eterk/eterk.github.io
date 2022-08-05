@@ -4,8 +4,12 @@ description: 记录一些个人在程序开发学习中的一些历程 # this me
 
 baseurl: "" # the subpath of your site, e.g. /blog
 
+avatar: facicon.ico
 # twitter_username: 不用tt
 github_username:  eterk
+stackoverflow : https://stackoverflow.com/users/11139261/summersking
+
+
 
 domain: eterk.github.io       # if you want to force HTTPS, specify the domain without the http at the start, e.g. example.com
 url: https://eterk.github.io  # the base hostname and protocol for your site, e.g. http://example.com
@@ -17,10 +21,17 @@ theme: minima
 repository: eterk/eterk.github.io
 plugins:
   - jekyll-feed
+  - jekyll-sitemap 
+
+
+posts_showdrafts: true
+posts_pagecount: 2
+limit_posts: 50
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
 # to override the default setting.
+
 exclude:
   - Gemfile
   - Gemfile.lock

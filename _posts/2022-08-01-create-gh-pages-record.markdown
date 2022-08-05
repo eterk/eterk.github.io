@@ -60,9 +60,11 @@ OpenSSL SSL_read: Connection was reset, errno 10054
 <div id="container"></div>
 <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
 <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<link rel="stylesheet" href="https://billts.site/extra_css/gitment.css">
+<script src="https://billts.site/js/gitment.js"></script>
 <script>
 var gitment = new Gitment({
-  id: '<%= page.title %>', // 可选。默认为 location.href
+//   id: '<%= page.title %>', // 可选。默认为 location.href
   owner: 'eterk',
   repo: 'eterk.github.io',
   oauth: {
