@@ -1,14 +1,12 @@
 title: keter's blog
 email: moshenwuji@live.com
-description: 记录一些个人在程序开发学习中的一些历程 # this means to ignore newlines until "baseurl:"
+description: The More I Learn, The Less I Know. 记录一些个人在程序开发学习中的一些历程 # this means to ignore newlines until "baseurl:"
 
 baseurl: "" # the subpath of your site, e.g. /blog
 
 avatar: facicon.ico
 # twitter_username: 不用tt
 github_username:  eterk
-stackoverflow : https://stackoverflow.com/users/11139261/summersking
-
 
 
 domain: eterk.github.io       # if you want to force HTTPS, specify the domain without the http at the start, e.g. example.com

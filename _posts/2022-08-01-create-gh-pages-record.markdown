@@ -11,16 +11,15 @@ tags : application
 
 遇到的主要问题是：
 
-1. 在进行本地服务器初始化的时候`bundle install` 等待太久,我替换了Gemfile 中的source 解决了
+- [x] 在进行本地服务器初始化的时候`bundle install` 等待太久,我替换了Gemfile 中的source 解决了
 
 ```yaml
 # source "https://rubygems.org"
 source 'http://rubygems.org'
 ```
 
-2. 在`bundle install` 后启动server 仍然报依赖缺失，`bundler: failed to load command: jekyll, `require': cannot load such file -- webrick`
+- [x] 在`bundle install` 后启动server 仍然报依赖缺失，`bundler: failed to load command: jekyll, `require': cannot load such file -- webrick`
 
-  solution:
 
         ```
         ~ bundle add webrick# (缺失的包)
@@ -28,12 +27,12 @@ source 'http://rubygems.org'
         ~ bundle exec jekyll server # 启动页面服务 Build the site and make it available on a local server
         ~ jekyll server # 也是启动页面服务
         ```
-3. 在提交文件遇到的一些问题
+- [x] 在提交文件遇到的一些问题
 
 本机之前没有安装过git ，我下载了一个最新版的git之后，直接新建了本地仓库，然后配置了用户名，邮箱等，最后连接了github 
 
-由于之前在github 页面创建过一个仓库，提交了一些文件，后来按照说明来在本地创建仓库，新的仓库代码无法合并到远程github 上，
-首先是pull 被拒绝
+由于之前在github 页面创建过一个仓库，提交了一些文件，后来按照说明来在本地创建仓库，新的仓库代码无法合并到远程github 上，首先是pull 被拒绝
+
 ```
 https://komodor.com/learn/how-to-fix-fatal-refusing-to-merge-unrelated-histories-error/
    git pull origin master --allow-unrelated-histories #使用这个方法解决
@@ -44,11 +43,7 @@ OpenSSL SSL_read: Connection was reset, errno 10054
 我使用设置不验证跳过这个错误。
 `git config --global http.sslVerify "false"`
 
-4.  Layout 'about' requested in _ does not exist
-暂时不太搞懂layout 和页面是怎么关联的
-
-
-5. post 中的文章老是没法正常展示在页面中，经过搜索检查原因总结如下
+- [x] post 中的文章老是没法正常展示在页面中，经过搜索检查原因总结如下
    [stackoverflow 回答](https://stackoverflow.com/questions/30625044/jekyll-post-not-generated)
 > The post is not placed in the _posts directory.
 > The post has incorrect title. Posts should be named YEAR-MONTH-DAY-title.MARKUP (Note the MARKUP - extension, which is usually .md or .markdown)
@@ -56,6 +51,10 @@ OpenSSL SSL_read: Connection was reset, errno 10054
 > The post has published: false in its front matter. Set it to true.
 > The title contains a : character. Replace it with &#58. Works in jekyll 3.8.3 (and probably in other 'recent' releases).
 
+- [x] 尝试使用gitment 给个人博客添加品论区，毕竟无法互动的博客没有灵魂
+  > [参考教程](https://imsun.net/posts/gitment-introduction/)
+  > [项目链接](https://github.com/imsun/gitment)  
+  > 不过我配置完以后，初始化评论登陆后报错，暂时没有成功[object ProgressEvent]
 
 <div id="container"></div>
 <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
