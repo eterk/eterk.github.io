@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "创建gh-pages 站点"
+title:  "创建gh-pages站点"
 date:   2022-08-01 13:30:00 +0000
 categories: 技术文章
 tags : application
@@ -55,6 +55,25 @@ OpenSSL SSL_read: Connection was reset, errno 10054
   > [参考教程](https://imsun.net/posts/gitment-introduction/)
   > [项目链接](https://github.com/imsun/gitment)  
   > 不过我配置完以后，初始化评论登陆后报错，暂时没有成功[object ProgressEvent]
+
+- [X] 个人博客里有许多模板语法，这些语法是 Liquid.js 语法，尝试修改的话可以查看[API](https://liquidjs.com/api/classes/liquid_.liquid.html)
+
+- [X] 在博客中添加数学表达式，参考了[stackoverflow](https://stackoverflow.com/questions/34347818/using-mathjax-on-a-github-page)的回答
+  ```
+  // append script import inside the <head/> of your _layouts/default.html file`
+  <script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+<!-- use dollar signs (i.e. $1 + 2$) to escape math sequence  -->
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$']]
+    }
+  };
+</script>
+
+  ```
 
 <div id="container"></div>
 <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
