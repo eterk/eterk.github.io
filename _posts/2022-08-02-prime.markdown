@@ -65,7 +65,7 @@ def countPrimes(n: Int): Int = {
     }
 ```
 
-使用scala 比较管用的集合函数api 写了一个版本，太慢了
+使用scala 比较惯用的集合函数api 写了一个版本，太慢了
 
 ```scala
 	import java.util.Math
@@ -167,5 +167,147 @@ def sqrt(v: Int, digit: Int) = {
 
     sqrt_(v)
   }
+```
+
+### 2022年9月7日
+今天看scala教程[scala 高级教程 P17 13:00（链接）](https://www.bilibili.com/video/BV1G64y1S7PY?p=17&vd_source=419bf4409bddef6e7562cd15148bbdcb)的时候发现了更简单的写法。
+在视频中，老师首先自己手写了一套scala 风格的纯函数流处理实现，然后用自己实现的Stream 对象实现了`Sieve of Eratosthenes` 算法。
+我在练习过程中把这一套手写实现复刻了一下。
+
+下面是Stream 核心功能实现的代码。
+
+```scala
+import scala.annotation.{tailrec, varargs}
+
+abstract class Stream[+A] {
+  def isEmpty: Boolean
+  def head: A
+  def tail: Stream[A]
+  def #::[B >: A](e: B): Stream[B] // 在stream 的头部添加元素e
+  def ++[B >: A](anotherStream: => Stream[B]): Stream[B] // 在stream 的尾部合并  anotherStream
+  def foreach(f: A => Unit): Unit
+  def map[B](f: A => B): Stream[B]
+  def flatMap[B](f: A => Stream[B]): Stream[B]
+  def filter(predicate: A => Boolean): Stream[A]
+  // take first n element from stream
+  def take(n: Int): Stream[A]
+  def takeAsList(i: Int): List[A]
+  @tailrec
+  final def toList[B >: A](acc: List[B] = Nil): List[B] = {
+    if (isEmpty)
+      acc.reverse
+    else
+      tail.toList(head :: acc)
+  }
+}
+
+object Stream {
+  def from[A](start: A)(generator: A => A): Stream[A] = {
+    new Cons[A](start, from(generator(start))(generator))
+  }
+}
+object EmptyStream extends Stream[Nothing] {
+  override def isEmpty: Boolean = true
+
+  override def head: Nothing = throw new NoSuchElementException
+
+  override def tail: Stream[Nothing] = throw new NoSuchElementException
+
+  override def #::[B >: Nothing](e: B): Stream[B] = new Cons[B](e, this)
+
+  override def ++[B >: Nothing](anotherStream: => Stream[B]): Stream[B] = anotherStream
+
+  override def foreach(f: Nothing => Unit): Unit = ()
+
+  override def map[B](f: Nothing => B): Stream[B] = this
+
+  override def flatMap[B](f: Nothing => Stream[B]): Stream[B] = this
+
+  override def filter(predicate: Nothing => Boolean): Stream[Nothing] = this
+
+  override def take(i: Int): Stream[Nothing] = this
+
+  override def takeAsList(i: Int): List[Nothing] = Nil
+}
+
+class Cons[+A](h: A, tl: => Stream[A]) extends Stream[A] {
+
+  override def head: A = h
+
+  override lazy val tail: Stream[A] = tl
+
+  override def isEmpty: Boolean = false
+
+  override def #::[B >: A](e: B): Stream[B] = new Cons[B](e, this)
+
+  override def ++[B >: A](anotherStream: => Stream[B]): Stream[B] = new Cons[B](head, tail ++ anotherStream)
+
+  override def foreach(f: A => Unit): Unit = {
+    f(head)
+    tail.foreach(f)
+  }
+  override def map[B](f: A => B): Stream[B] = new Cons[B](f(head), tail.map(f))
+
+  override def flatMap[B](f: A => Stream[B]): Stream[B] = f(head) ++ tail.flatMap(f)
+
+  override def filter(predicate: A => Boolean): Stream[A] = if (predicate(head)) {
+    new Cons(head, tail.filter(predicate))
+  } else {
+    tail.filter(predicate)
+  }
+
+  override def take(i: Int): Stream[A] = {
+    if (i <= 0) {
+      EmptyStream
+    } else if (i == 1) {
+      new Cons(head, EmptyStream)
+    } else {
+      new Cons(head, tail.take(i - 1))
+    }
+
+  }
+
+  override def takeAsList(i: Int): List[A] = take(i).toList()
+
+}
+```
+个人理解整个函数式编程实现流处理流程的核心在于  使用递归和scala 中`call-by-name` 传名变量的使用。
+
+以下是使用自己定义的Stream 实现的的`Sieve of Eratosthenes` 算法以及测试
+
+```scala
+  def eratosthenes(numbers: Stream[Int]): Stream[Int] = {
+    if (numbers.isEmpty) numbers
+    else new Cons[Int](numbers.head, eratosthenes(numbers.tail.filter(_ % numbers.head != 0)))
+  }
+
+  def test={
+    val stream=Stream.from(2)(_ + 1).take(100) // 长度为 100的 从2 开始的流数据
+    // 打印输出结果
+    println(Eratosthenes(stream).toList().mkString(","))
+    // 2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97,101
+  }
+
+```
+其实使用scala 的提供的数据结构直接实现就好
+
+```scala
+// "Prefer LazyList instead", since = "2.13.0"
+// 流结构的
+def Eratosthenes(numbers: LazyList[Int]): LazyList[Int] = {
+  if (numbers.isEmpty) numbers
+  else numbers.head+:Eratosthenes(numbers.tail.filter(_ % numbers.head != 0))
+}
+
+// 调用
+ println(Eratosthenes(LazyList.from(2,1).take(100)).toSeq.mkString(","))
+
+// 普通的seq 结构
+  def Eratosthenes(numbers: Seq[Int]): Seq[Int] = {
+    if (numbers.isEmpty) numbers
+    else numbers.head+:Eratosthenes(numbers.tail.filter(_ % numbers.head != 0))
+  }
+// 调用
+   println(Eratosthenes(2 to 101).mkString(","))
 ```
 
