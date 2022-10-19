@@ -92,3 +92,6 @@ var gitment = new Gitment({
 })
 gitment.render('container')
 </script>
+
+ [x] 最近系统更新 `jekyll server` 命令突然运行报错 `unexpected ucrtbase.dll`
+ 这个提示其实时启动ruby 时产生的,不知道微软的破程序更新老是有新bug 产生  2022-10-19
