@@ -33,9 +33,9 @@ tags : computer
 
 1. 连续的链条和厄运金字塔
 
-![厄运金字塔类型代码](/assets/jpg/pryamid_of_doom_code.png)
+![厄运金字塔类型代码](/assets/pic/pryamid_of_doom_code.png)
 
-![厄运金字塔类型解决方案](./../../resource/jpg/pryamid_of_doom_code_solve.png)
+![厄运金字塔类型解决方案](/assets/pic//pryamid_of_doom_code_solve.png)
 
 
 
