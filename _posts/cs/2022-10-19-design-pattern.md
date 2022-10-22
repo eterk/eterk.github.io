@@ -16,17 +16,26 @@ tags : program
 1. 设计模式必须合理使用.`如果你只有一把铁锤， 那么任何东西看上去都像是钉子。`
 
 根据应用的层面可以吧模式分为 惯用技巧(最基础最底层的)和构架模式(最通用最高层的).
-根据设计模式的意图分类
-可以把设计模式分为三类
+根据设计模式的意图分类，可以把设计模式分为三类
 1. 创建型模式(create)
 2. 构造型模式(related)
 3. 行为型模式(communicate)
 
+在个人学习设计模式过程中，发现虽然有过多次学习，但是过不了多久就会忘记。最初学习是为了应对面试，后面学习为了软考，其实最终实际用途是再个人工作和开发过程中使用。许多设计模式因为翻译的问题，术语比较晦涩，比如享元模式，桥接，或者由于术语和生活中的一些例子比较接近的缘故会产出一些不太正确的思想。在设计模式学习中，个人发现许多的设计模式思想在我尚未系统学习之前在开发过程中已经简单使用了，和实际的设计模式的区别在于，我可能没有定义最规范的设计模式接口，而导致我虽然用了设计模式的思想，但在实际应用中，代码仍避免不了不断的修改和层次不清晰等问题，在学习理论过后，个人的编程实践中应该会有更好的提升。如果对设计模式的掌握评分的话，可能是由多方面的维度的。
+1. 实际开发中结合业务的应用
+2. 在理论掌握中，精确的掌握设计模式的各个目标概念。明晰多个容易混淆模式的区别
+3. 在实际开发中按照标准设计模式的模型合理建模
+4. 综合使用多种设计模式以达到最终目的
+5. 在使用设计模式的前提下，写出更好维护，健壮，高内聚低耦合的实际代码
+这些维度只要在任意方面有太大短板，就不能发挥出设计模式应有的价值
+
+下面是一些具体的设计模式的一些笔记
+
 ![示意图](/assets/pic/design_pattern.png)
-1.创建性模式
+### 创建性模式
 - 单例模式设计意图(Singleton)
-1. 保证一个类只有一个实例
-2. 为该实例提供全局访问点
+  1. 保证一个类只有一个实例
+  2. 为该实例提供全局访问点
 - 工厂模式的一些概念辨析(factory method)
   1. 静态工厂方法不基于继承,仅仅是提够了几个便捷的构建方法,严格意义上不是工厂模式
   2. 构建方法可以有很多种类别,只要可以产生新对象的方法就可以理解为构建方法
@@ -38,23 +47,46 @@ tags : program
 - 生成器模式(Builder)
   1. 类似于一个生产流水线,可以根据模块化生产,最后组装成一个复杂的产品,在未最终创建产品(出厂)之前,组装的都不是产品
   2. 可以设置管理员类,使用该类生成一些常见的对象结构
-2. 构建型模式
+### 构建型模式
    - 适配器模式(Adapter)
-   1. 适用场景:
-        a.希望使用某个类,但是类的接口于其他代码不兼容(xml 生成图表,但是json )
-        b.需要复用一些类,他们处于同一个继承体系,并且他们有额外有一些共同的签名的方法,但是这些方法又有所区别(? 需要一个实例说明)
+     1. 适用场景:
+          a.希望使用某个类,但是类的接口于其他代码不兼容(xml 生成图表,但是json )
+          b.需要复用一些类,他们处于同一个继承体系,并且他们有额外有一些共同的签名的方法,但是这些方法又有所区别(? 需要一个实例说明)
    - 桥接模式(Bridge)
-    1. 将一个实体的控制权转移到一个抽象关系中（类似于遥控器和不同具体设备的关系，GUI和具体系统实现的关系
-    2. 常常用在跨平台适配中
+      1. 将一个实体的控制权转移到一个抽象关系中（类似于遥控器和不同具体设备的关系，GUI和具体系统实现的关系
+      2. 常常用在跨平台适配中
     - 组合模式
-    1. 树形结构的模式存在时可以使用组合模式来实现.组合模式分为容器(根节点)和实体(叶子节点)
+      1. 树形结构的模式存在时可以使用组合模式来实现.组合模式分为容器(根节点)和实体(叶子节点)
     - 装饰器模式(Decorator)
-    1. 装饰器类实现装饰对象的接口
-    2. 无需修改代码的情况下即可使用对象， 且希望在运行时为对象新增额外的行为， 可以使用装饰模式
-    3. 在继承无法实现功能的时候,跳过final 限制实现扩展功能
+      1. 装饰器类实现装饰对象的接口
+      2. 无需修改代码的情况下即可使用对象， 且希望在运行时为对象新增额外的行为， 可以使用装饰模式
+      3. 在继承无法实现功能的时候,跳过final 限制实现扩展功能
    - 外观模式(Facade)
-     1. `god object` 
-  3. ![上帝对象](https_en.wikipedia.org/?url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FGod_object)
-
-摘自维基百科
-   > Most of such a program's overall functionality is coded into a single "all-knowing" object, which maintains most of the information about the entire program, and also provides most of the methods for manipulating this data. Because this object holds so much data and requires so many methods, its role in the program becomes god-like (all-knowing and all-encompassing) 
+       1. `god object` 
+        装饰器容易让自身成为 [上帝对象](https_en.wikipedia.org/?url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FGod_object),摘自维基百科:
+            > Most of such a program's overall functionality is coded into a single "all-knowing" object, which kkvkkmaintains most of the information about the entire program, and also provides most of the methods for manipulating this data. Because this object holds so much data and requires so many methods, its role in the program becomes god-like (all-knowing and all-encompassing) 
+ - 享元模式
+   - 对象的常量模式被称为`内在状态`,其他对象只能读取,不能改变.对象可以被外部改变的称为`外在状态`.
+   - 享元模式建议不在对象中存储外在状态,而是将其传递给依赖他的特殊方法.方便复用.
+   - 将外在状态封装在flyweight中,在flyweight 可以创建操纵目标对象的方法
+   - 在flyweight容器中 中集合大量常用的fkyweight,需要使用时按照逻辑去工厂中取,如果工厂中没有就自己创建.
+   - 个人理解享元模式主要用于优化程序的空间使用情况,但会增加程序的复杂度
+ ![模式结构](https://refactoringguru.cn/images/patterns/diagrams/flyweight/structure.png)
+  
+- 代理模式
+    - 代理模式提供一种替换原来接口的功能,却不改变原来的接口的方式.
+    - ![模式结构](https://refactoringguru.cn/images/patterns/diagrams/proxy/structure-indexed-2x.png)
+    - 比如对模拟数据库的查询缓存就是一种代理,当本地缓存区有符合条件的已缓存数据时,直接使用本地缓存数据,当没有时则查询数据库集群的数据
+    - 现实世界中,使用电子支付和使用纸币支付或者信用卡支付 就是对商家付款行为的代理
+  ### 行为模式
+    - 责任链模式(chain of responsibility)
+      - ![模式结构](https://refactoringguru.cn/images/patterns/diagrams/chain-of-responsibility/structure-indexed-2x.png)
+      - 类比于现实中，寻找售后客服电话时，客服根据实际问题将用户的问题一层层细化最终传递给最终解决的负责人手里
+      - 适合场景
+          1.程序不知道使用哪一个处理方法可以处理时（一系列的试错）
+          2. 程序必须按照一定顺序处理时
+          3. 当处理顺序可能会在运行时改变时
+     - 命令模式 （Command）
+        ![模式结构图](https://refactoringguru.cn/images/patterns/diagrams/command/structure-indexed-2x.png)
+        - 核心组成角色，有触发者，接收者，命令类
+        - 可以将触发者和执行者解耦
