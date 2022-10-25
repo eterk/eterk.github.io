@@ -6,8 +6,7 @@ categories: 技术文章
 tags : application
 ---
 
-大致是按照操作的
-[gh-操作] (https://docs.github.com/cn/pages/setting-up-a-github-pages-site-with-jekyll/creating-a-github-pages-site-with-jekyll)
+大致是按照[github blog 文档](https://docs.github.com/cn/pages/setting-up-a-github-pages-site-with-jekyll/creating-a-github-pages-site-with-jekyll)操作的
 
 遇到的主要问题是：
 
