@@ -86,7 +86,17 @@ tags : program
           1.程序不知道使用哪一个处理方法可以处理时（一系列的试错）
           2. 程序必须按照一定顺序处理时
           3. 当处理顺序可能会在运行时改变时
-     - 命令模式 （Command）
-        ![模式结构图](https://refactoringguru.cn/images/patterns/diagrams/command/structure-indexed-2x.png)
+  ### 命令模式 （Command）
+    ![模式结构图](https://refacetoringguru.cn/images/patterns/diagrams/command/structure-indexed-2x.png)
         - 核心组成角色，有触发者，接收者，命令类
         - 可以将触发者和执行者解耦
+  ### 迭代器模式(Iterator)
+     ![模式结构图](https://refactoringguru.cn/images/patterns/diagrams/iterator/structure-2x.png)
+        - 隐藏集合的底层结构,提供对类似集合对象的一个遍历操作的封装,可以保证每一个节点只访问一次
+        - 根据不同的目的,可以对一个集合的不同遍历方式的抽象
+        - 比如对于range 结构,可以在不初始化所有元素的前提下对range 进行有效的封装
+  ### 中介模式(Mediator)
+
+  ![模式结构图](https://refactoringguru.cn/images/patterns/diagrams/mediator/structure-2x.png)
+      - spring mvc 架构中的 c(Controler) 就是中介者模式的典型应用
+[源码](/assets/code/mediator.zip)参考网站中的 java 笔记小程序 
