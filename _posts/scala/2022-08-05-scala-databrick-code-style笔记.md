@@ -184,5 +184,29 @@ class Foo {
     编码过程中不同类型变量命名遵顼约定的规范等。apply 方法定义在object中
 1. 性能问题
     使用while  替代 map for 等循环，性能敏感区块使用 null 替代None 等
+### 以前的笔记
+1. 命名约定
+2. 1行长度100字符以内
+3. 避免使用中缀表示法
+4. 避免使用多余的小括号和花括号
+5. 实现抽象方法使用oveerride 修饰符
+6. 避免使用按名传参
+7. 尾递归使用注解@tailrec
+8. 不要捕获Throwable 或 Exception 使用 scala.util.control.NonFatal
+9. 如果一个值可能为空 使用 Option
+10. 使用private[this]
+11. 性能（在有性能要求的时候）
+a. 使用while 而非for 或者map,foreach ，
+b. 使用microbenchmark
+c. 使用null 而非 Option
+d. 优先使用JAVA 集合
+12. java 通用性
+a. 默认方法实现的trait 无法在 java中使用，使用 抽象类代替
+b. 类型别名
+c. 默认参数值
+d. 多参数列表
+e. 可变参数，使用@scala.annotation.varargs
+13. 优先使用 nanoTime,则可以保证是单调递增的
+14. 优先使用经过良好测试的方法
 
 编码规范可以理解开发团队在长期的生产实践中总结的经验，遵循这些规范可以避免在后续的团队开发协作中形成统一风格，避坑
