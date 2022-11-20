@@ -1,0 +1,86 @@
+1. 准备ruby 安装包
+[下载页面](https://www.ruby-lang.org/en/downloads/) -> ruby-3.1.2.tar.gz
+
+
+将放入相应的服务器后,就可以进行安装.
+我使用 源码安装的模式直接安装
+
+```
+# 需要 有gcc g++ make 等环境
+gcc -v # 查看版本
+g++ -v # 查看版本
+make -v # 查看版本
+tar -zxvf  ruby-3.1.2.tar.gz # 进行解压 
+cd ruby-3.1.2 # 进入页面
+./configure # 安装前配置
+make # 编译
+ruby -v # 查看ruby 版本
+```
+`gem` 是ruby 自带的包管理工具
+[jekyll 网址 ](https://rubygems.org/gems/jekyll/)
+在服务器中安装 `jekyll`
+1. 互联网安装的方式很简单,参考[网络上的回答](https://stackoverflow.com/questions/4402819/download-all-gems-dependencies)
+   1. 在一个文件夹内创建GemFile
+    > source "http://rubygems.org"
+    > gem 'jekyll', '3.2.1' 
+   2. 在该文件夹内执行`bundle install`
+   3. 复制`cache ` 文件夹中的gem 文件到目标机器
+   4. 在目标机器上 执行gem install xx.gem
+由于我需要部署的环境没有互联网链接
+所以我需要在有互联网的电脑上安装一份ruby
+然后使用 `gem fetch jekyll` 将 `jekyll` 等依赖的gem 文件下载下来，然后复制到需要部署的环境服务器中
+
+```
+gem fetch jekyll -v 4.3.1 # 下载指定版本的jekyll gem 文件
+gem install ./* # 安装该文件夹下所有的gem 文件
+gem install ./xxxx.gem # 安装gem
+gem uninstall ./xx.gem -v versionNum # 卸载指定
+gem uninstall -a # 卸载全部
+
+```
+
+在前面做完所有工作后,
+再有Gemfile的文件夹内 执行 `bundle install` 后,一切看起来没有异常.
+然后执行 `bundle exec jekyll server` 启动 jekyll 服务器,结果报错
+
+> undefined symbol rb_safe_level
+
+冲浪后得知, `rb_safe_level` 好像在 3.0.0 版本以后 从ruby 中移除了,想必是 某个jekyll依赖依赖了这个变量,所以找不到
+
+于是我把ruby 卸载重装了老版本 (3.1.2->3.0.4)  ,把安装ruby -> 安装依赖 全都重新执行了一遍
+``
+遇到的几个安装报错的包,比如在centos 中安装了后 centos 却依然找不到,比如`ffi` 等,经过检查后发现,是由于这些包有linux 版本和windows 版本.
+我从windows 版本(`x64-mingw32.gem`)上下载的包替换到就出了问题,需要去rubygems 网站单独下载. 这些包好像都称自己是native extension,可能是依赖于系统底层的包.
+
+
+一切环境配置好之后,我将我这个项目的源码直接复制到新配置的环境,然后启动项目
+
+```
+bundle install
+bundle exec jekyll server --port 3333 --host 198.218.6.xx
+```
+
+成功启动没有报错
+
+之后执行下面的命令 开放了3333 端口
+
+`[root@localhost ~]# iptables -I INPUT -p tcp --dport 3333 -j ACCEPT`
+(其实就是向端口配置文件插入了 3333)
+
+> 开放端口
+
+如果想开放端口，如：8382
+
+1.通过vi /etc/sysconfig/iptables 进入编辑增添一条 -A INPUT -p tcp -m tcp --dport 8382 -j ACCEPT 即可
+
+2.执行 /etc/init.d/iptables restart 命令将iptables服务重启
+
+3.保存 /etc/rc.d/init.d/iptables save
+
+注：如若不想直接修改iptables表，可以直接输入下面命令来处理：
+
+[root@localhost ~]# iptables -I INPUT -p tcp --dport 8382 -j ACCEPT
+
+综上所述，我们知道了使用linux查看防火墙开放端口是非常重要的，我们首先要了解什么是防火墙，其次要了解使用linux查看防火墙开放端口的步骤，会使用linux来查看防火墙的开放端口。
+
+我就可以在我的个人电脑上 通过 `198.218.6.xx:3333` 访问 我启动的服务了

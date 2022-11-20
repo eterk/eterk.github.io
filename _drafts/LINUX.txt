@@ -1,0 +1,48 @@
+﻿
+--------------
+rm [-dfirv][--help][--version][文件或目录...]
+补充说明：执行rm指令可删除文件或目录，如欲删除目录必须加上参数”-r”，否则预设仅会删除文件。 
+参　　数：
+　-d或–directory 　直接把欲删除的目录的硬连接数据删成0，删除该目录。 
+　-f或–force 　强制删除文件或目录。 
+　-i或–interactive 　删除既有文件或目录之前先询问用户。 
+　-r或-R或–recursive 　递归处理，将指定目录下的所有文件及子目录一并处理。 
+　-v或–verbose 　显示指令执行过程。 
+--------------
+mkdir 创建文件夹
+touch  创建文件
+复制
+cp -rf rprojroot /usr/local/lib64/R/library
+--------------
+du -h -d 1  #查看当前目录的文件大小信息
+--------------
+定时任务
+crontab -r 删除     #30 9 * * * sh /home/gbase/forecast/send_forecast_wzz.sh
+crontab -l 列出所有的定时任务信息	
+crontab -e 新建定时任务
+01 7 * * * sh /home/DL/5train_batch_predict_test/5train_shell.sh &> /tmp/r
+定时任务crontab中输出系统的环境变量
+* * * * * env > /tmp/env.output
+--------------
+screen运行
+screen -r name
+--------------
+查看cpu    top 
+us用户 id空闲 sy系统
+查看系统磁盘
+df -h 
+查看指定目录下的文件大小
+du -d 1 -h
+查询指定进程
+ps -ef |grep rstudio
+ kill -9 [PID]
+--------------
+添加路由
+ route -p add 198.0.0.0 MASK 255.0.0.0  198.216.10.254
+
+
+
+
+
+
+
