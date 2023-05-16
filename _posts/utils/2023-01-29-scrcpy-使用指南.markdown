@@ -1,0 +1,55 @@
+---
+layout: post
+title:  "scrcpy-使用计算机操控手机-使用体验"
+date:   2023-01-29 13:30:00 +0000
+categories: 工具分享
+tags : application
+---
+
+个人本来使用小米自己开发的远程控制软件,但是使用过程中感觉,功能太少,而且帧率太低,有时有无法链接的问题.小米的自己软件安装包就有500M+.
+在搜索远程操控手机时发现了 github 上的这个项目,非常方便好用,安装包小,开源.
+
+[scrcpy项目链接](https://github.com/Genymobile/scrcpy/blob/master/README.md)
+
+需要的步骤
+1. 在windows 上安装scrcpy
+2. 手机上设置好开发者模式->打开usb 调试->打开usb 调试(安全设置)
+3. 使用usb 链接手机和电脑,打开scrcpy 即可
+
+为了更方便操控电脑,我是用了 tcpip 功能,在同样的网络下直接远程链接电脑
+1. 在scrcpy 安装目录下使用 adb connect 链接
+2. 使用`adb shell ip route` 获取手机的ip地址
+3. 使用`adb tcpip ${端口号}`打开手机对应端口
+4. 使用`adb connect `ip:port` 即可远程链接手机(usb 和 tcpip 链接时需要指定链接类型,相应的参数在项目中都有)
+
+
+```cmd
+adb shell ip route | awk '{print $9}'
+--print-fps
+--tcpip=10.112.2.104:55555 --bit-rate=5M --max-fps=35 
+```
+其它命令
+```cmd
+
+adb kill-server 杀掉adb 进程
+## 自动化获取ip地址的bat 脚本
+@echo off
+for /f "tokens=2 delims=:" %%i in ('adb shell ifconfig^|findstr "Bcast" ') do set ipaddr=%%i
+for /f "tokens=1 delims=Bcast" %%i in ("%ipaddr%") do set ip=%%i
+set ipport=%ip:~0,-2%
+set ipport=%ipport%:5555
+@echo off
+@echo %ipport%
+adb tcpip 5555
+adb connect %ipport%
+pause
+#启动命令
+
+echo "C:\Program Files\scrcpy-win64-v1.25\scrcpy.exe" --tcpip=%ipport% --bit-rate=5M --max-fps=35
+```
+
+#### 参考资料 
+- [解决ADB错误“more than one device and emulator”的方法1](https://blog.csdn.net/yuemingxingxing/article/details/86590989)
+- [解决ADB错误“more than one device and emulator”的方法2](https://blog.csdn.net/gaojinshan/article/details/9455193)
+- [Windows bat脚本 提取指定关键字，如：仅获取返回信息ip地址](https://blog.csdn.net/qq_25305833/article/details/94471684)
+- [scrcpy项目](https://github.com/Genymobile/scrcpy)

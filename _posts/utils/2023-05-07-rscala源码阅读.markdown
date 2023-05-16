@@ -1,0 +1,49 @@
+---
+layout: post
+title:  "rscala-源码阅读"
+date:   2023-05-07 13:30:00 +0000
+categories: 源码阅读
+tags : application
+---
+我工作的项目一直在spark 中使用r算法包的需求，中间用到了rscala 这个项目，但是性能比较差，我想通过对源码的阅读通过修改源码的方式来提高rscala 的性能以及和我们的项目使用的一个定制化修改。
+
+首先从github 下载项目：
+以下是项目的文件目录结构
+```wsl
+├── LICENSE 
+├── R    # 项目脚本
+├── README.md
+├── benchmarks
+├── bin #  可执行脚本
+├── build.sbt # sbt build 脚本
+├── deliveries
+├── examples #示例
+├── others
+├── project
+├── release-procedure
+├── reverse-dependencies
+├── scratch
+├── src # scala 源码
+```
+
+
+该项目是基于tcp 对R 和 scala 进行通信，实现在scala 或者 r 中的调用。
+本人日常主要使用scala 端调用R
+
+
+在进行项目debug 之前首先需要 进入`bin` 中进行package,否则项目环境没有准备好，
+我遇到的第一个困难就是由于package 没有进行完成，scala 程序的rclient看似启动，但是r端口没有准备好，所以导致r 无法接收到消息，以至于通信没法完成。
+package 中主要
+
+项目在scala 中启动两个端口来实现 scala 和r 的通信，将scala 和 r的输出互相发送给对方。
+scala 通过 对系统命令的调用来启动一个R 进程
+然后将一些环境函数写入到这个R进程中，这些函数主要起到对于接收的信息的解析和执行的作用。每次启动R 进程就会写出临时文件.
+
+
+
+sbt 最后打包环节
+
+```
+publishLocal // 发布到本地的 Ivy repository
+publishM2 // 发布到本地maven 仓库
+```

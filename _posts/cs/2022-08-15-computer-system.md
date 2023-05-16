@@ -26,10 +26,11 @@ tags : computer
 
    - P(X)：检查X进程是否完成，如果完成则唤醒
    - V(X)：唤醒当前进程指向X进程
-
-
-
-
+3.  Little's Law 利特尔法则
+    > L=λW
+    λ:物体进入系统中的速率
+    W：物体的平均逗留时间
+    L：物体中的总数量
 Abstraction
 Encapsulation
 Inheritance

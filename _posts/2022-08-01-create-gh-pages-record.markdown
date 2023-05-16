@@ -6,7 +6,7 @@ categories: 技术文章
 tags : application
 ---
 
-大致是按照[github blog 文档](https://docs.github.com/cn/pages/setting-up-a-github-pages-site-with-jekyll/creating-a-github-pages-site-with-jekyll)操作的
+大致是按照[github blog 文档](https://docs.github.com/cn/pages/setting-up-a-github-pages-site-with-jekyll/creating-a-github-pages-site-with-jekyll)进行操作.
 
 ###遇到的主要问题
 - [x] 在进行本地服务器初始化的时候`bundle install` 等待太久,我替换了Gemfile 中的source 解决了
@@ -20,8 +20,7 @@ tags : application
   > bundler: failed to load command: jekyll, 
   > require': cannot load such file -- webrick
 
-
-  ```
+  ```shell
   ~ bundle add webrick# (缺失的包)
   ~ bundle install
   ~ bundle exec jekyll server # 启动页面服务 Build the site and make it available on a local server
@@ -36,16 +35,16 @@ tags : application
   - 首先是pull 被拒绝
       [解决方案](https://komodor.com/learn/how-to-fix-fatal-refusing-to-merge-unrelated-histories-error/)
 
-  ```
+  ```git
    git pull origin master --allow-unrelated-histories 
   ```
 
   - 然后在pull 的过程中访问远程 失败 出现这个错误
 
     > OpenSSL SSL_read: Connection was reset, errno 10054
-    
+
     我使用设置不验证跳过这个错误。
-    
+
     `git config --global http.sslVerify "false"`
 
 - [x] post 中的文章老是没法正常展示在页面中，经过搜索检查原因总结如下
@@ -125,3 +124,6 @@ Use it in your template layout where you have {{ content }} which is the HTML re
 
 {% include toc.html html=content %}
 ```
+
+- [x] 日期在未来的文章无法渲染
+只需要在 _config.yml 中配置 `future: true`  覆盖默认配置可以了

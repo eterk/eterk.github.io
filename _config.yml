@@ -21,7 +21,7 @@ plugins:
   - jekyll-feed
   - jekyll-sitemap 
 
-
+future: true
 posts_showdrafts: true
 posts_pagecount: 2
 limit_posts: 50

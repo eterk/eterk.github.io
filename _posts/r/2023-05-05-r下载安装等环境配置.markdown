@@ -1,0 +1,7 @@
+可以通过ID 号选择使用的cran 的镜像位置
+chooseCRANmirror(16)
+options("repos" = c(CRAN="http://mirrors.cloud.tencent.com/CRAN/"))
+options(BioC_mirror="http://mirrors.cloud.tencent.com/bioconductor")
+
+## R 的数据结构
+http://adv-r.had.co.nz/Data-structures.html

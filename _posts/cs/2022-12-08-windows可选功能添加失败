@@ -1,0 +1,16 @@
+---
+layout: post
+title:  "windows 操作笔记"
+date:   2022-12-08 11:11:00 +0800
+categories: 个人学习
+tags : program
+---
+
+####  可选功能中“无线显示器”功能安装失败
+
+> 可能由于安装残留导致
+1. 建议您尝试先在服务中找到Windows update服务，并关闭
+2. 在对您的电脑C盘进行磁盘清理，看看是否可以清理该功能残留
+3. 删除路径 C:\Windows\SoftwareDistribution\DataStore
+4. 删除路径 C:\Windows\SoftwareDistribution\Download 
+5. 重新启动 启动Windows update服务
