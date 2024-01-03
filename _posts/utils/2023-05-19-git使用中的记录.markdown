@@ -1,0 +1,21 @@
+---
+layout: post
+title:  "git-使用记录"
+date:   2023-05-19 13:30:00 +0000
+categories: 问题记录
+tags : application
+---
+
+
+##### git clone error: RPC failed; curl 56 OpenSSL SSL_read: SSL_ERROR_SYSCALL, errno 10054
+
+[解决方案](https://stackoverflow.com/questions/46232906/git-clone-error-rpc-failed-curl-56-openssl-ssl-read-ssl-error-syscall-errno)
+`git config http.postBuffer 524288000`
+
+
+
+    > OpenSSL SSL_read: Connection was reset, errno 10054
+
+    我使用设置不验证跳过这个错误。
+
+    `git config --global http.sslVerify "false"`

@@ -1,0 +1,7 @@
+SBT on IntelliJ takes a very long to time refresh
+
+
+`updateOptions := updateOptions.value.withCachedResolution(true)`
+
+<!-- 使用命令下载指定的mvn 包 -->
+mvn dependency:get  -DgroupId=pl.project13.scala -DartifactId=sbt-jmh -Dversion=0.4.2
